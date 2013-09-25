@@ -1,0 +1,65 @@
+Chord run initiated at: Sep 24, 2013 4:00:43 PM
+ENTER: liveness at Tue Sep 24 16:00:46 EDT 2013
+********** liveness analysis *********
+ENTER: RTA
+Iteration: 0
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+LEAVE: RTA
+Time: 00:00:30:798 hh:mm:ss:ms
+Control flow graph for main:([Ljava/lang/String;)V@ArrayDemo:
+BB0 (ENTRY)	(in: <none>, out: BB2)
+
+BB2	(in: BB0 (ENTRY), out: BB3)
+1: NEWARRAY T1, IConst: 10, int[]
+2: MOVE_A R2, T1
+3: MOVE_I R3, IConst: 0
+
+BB3	(in: BB2, BB4, out: BB4, BB5)
+29: ARRAYLENGTH T5, R2
+30: IFCMP_I R3, T5, GE, BB5
+
+BB5	(in: BB3, out: BB6)
+49: MOVE_I R3, IConst: 0
+
+BB6	(in: BB5, BB7, out: BB7, BB8)
+27: ARRAYLENGTH T5, R2
+28: IFCMP_I R3, T5, GE, BB8
+
+BB8	(in: BB6, out: BB1 (EXIT))
+43: GETSTATIC_A T1, .out
+44: INVOKEVIRTUAL_V println:()V@java.io.PrintStream, (T1)
+45: RETURN_V
+
+BB1 (EXIT)	(in: BB8, out: <none>)
+
+BB7	(in: BB6, out: BB6)
+31: GETSTATIC_A T1, .out
+32: NEW T6, java.lang.StringBuilder
+33: MOVE_A T7, T6
+34: INVOKESTATIC_V <init>:()V@java.lang.StringBuilder, (T7)
+35: ALOAD_I T8, R2, R3
+36: INVOKEVIRTUAL_A T6, append:(I)Ljava/lang/StringBuilder;@java.lang.StringBuilder, (T6, T8)
+38: MOVE_A T7, AConst: " "
+37: INVOKEVIRTUAL_A T6, append:(Ljava/lang/String;)Ljava/lang/StringBuilder;@java.lang.StringBuilder, (T6, T7)
+39: INVOKEVIRTUAL_A T6, toString:()Ljava/lang/String;@java.lang.StringBuilder, (T6)
+40: INVOKEVIRTUAL_V print:(Ljava/lang/String;)V@java.io.PrintStream, (T1, T6)
+41: ADD_I R3, R3, IConst: 1
+42: GOTO BB6
+
+BB4	(in: BB3, out: BB3)
+46: ASTORE_I R3, R2, R3
+47: ADD_I R3, R3, IConst: 1
+48: GOTO BB3
+
+Exception handlers: []
+Register factory: Registers: 9
+********** ENTER Analysis Results **********
+********** LEAVE Analysis Results **********
+LEAVE: liveness
+Exclusive time: 00:00:31:108 hh:mm:ss:ms
+Inclusive time: 00:00:31:108 hh:mm:ss:ms
+Chord run completed at: Sep 24, 2013 4:01:17 PM
+Total time: 00:00:34:416 hh:mm:ss:ms
