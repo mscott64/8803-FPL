@@ -1,5 +1,5 @@
-Chord run initiated at: Sep 24, 2013 4:00:43 PM
-ENTER: liveness at Tue Sep 24 16:00:46 EDT 2013
+Chord run initiated at: Sep 26, 2013 3:59:19 PM
+ENTER: liveness at Thu Sep 26 15:59:22 EDT 2013
 ********** liveness analysis *********
 ENTER: RTA
 Iteration: 0
@@ -8,7 +8,7 @@ Iteration: 2
 Iteration: 3
 Iteration: 4
 LEAVE: RTA
-Time: 00:00:30:798 hh:mm:ss:ms
+Time: 00:00:20:800 hh:mm:ss:ms
 Control flow graph for main:([Ljava/lang/String;)V@ArrayDemo:
 BB0 (ENTRY)	(in: <none>, out: BB2)
 
@@ -59,7 +59,7 @@ Register factory: Registers: 9
 ********** ENTER Analysis Results **********
 ********** LEAVE Analysis Results **********
 LEAVE: liveness
-Exclusive time: 00:00:31:108 hh:mm:ss:ms
-Inclusive time: 00:00:31:108 hh:mm:ss:ms
-Chord run completed at: Sep 24, 2013 4:01:17 PM
-Total time: 00:00:34:416 hh:mm:ss:ms
+Exclusive time: 00:00:20:898 hh:mm:ss:ms
+Inclusive time: 00:00:20:898 hh:mm:ss:ms
+Chord run completed at: Sep 26, 2013 3:59:43 PM
+Total time: 00:00:24:060 hh:mm:ss:ms

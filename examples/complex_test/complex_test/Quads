@@ -1,0 +1,60 @@
+ [java] BB0 (ENTRY)	(in: <none>, out: BB2)
+     [java] 
+     [java] BB2	(in: BB0 (ENTRY), out: BB3)
+     [java] 1: NEWARRAY T1, IConst: 10000, int[]
+     [java] 2: MOVE_A R2, T1
+     [java] 3: NEWARRAY T1, IConst: 10000, long[]
+     [java] 4: MOVE_A R3, T1
+     [java] 5: MOVE_I R4, IConst: 0
+     [java] 
+     [java] BB3	(in: BB2, BB4, out: BB4, BB5)
+     [java] 36: ARRAYLENGTH T5, R2
+     [java] 37: IFCMP_I R4, T5, GE, BB5
+     [java] 
+     [java] BB5	(in: BB3, out: BB6)
+     [java] 51: MOVE_L R6, LConst: 0
+     [java] 52: MOVE_I R7, IConst: 0
+     [java] 
+     [java] BB6	(in: BB5, BB13, out: BB7, BB14)
+     [java] 60: ARRAYLENGTH T5, R2
+     [java] 61: IFCMP_I R7, T5, GE, BB14
+     [java] 
+     [java] BB14	(in: BB6, out: BB1 (EXIT))
+     [java] 71: RETURN_V
+     [java] 
+     [java] BB1 (EXIT)	(in: BB14, out: <none>)
+     [java] 
+     [java] BB7	(in: BB6, out: BB8, BB12)
+     [java] 68: ALOAD_I T8, R2, R7
+     [java] 69: REM_I T8, T8, IConst: 2
+     [java] 70: IFCMP_I T8, IConst: 0, NE, BB12
+     [java] 
+     [java] BB12	(in: BB7, out: BB13)
+     [java] 73: MOVE_L R6, LConst: 0
+     [java] 
+     [java] BB8	(in: BB7, out: BB9)
+     [java] 72: MOVE_I R9, IConst: 0
+     [java] 
+     [java] BB9	(in: BB8, BB10, out: BB10, BB11)
+     [java] 58: ALOAD_I T5, R2, R7
+     [java] 59: IFCMP_I R9, T5, GE, BB11
+     [java] 
+     [java] BB11	(in: BB9, out: BB13)
+     [java] 67: GOTO BB13
+     [java] 
+     [java] BB13	(in: BB11, BB12, out: BB6)
+     [java] 55: ASTORE_L R6, R3, R7
+     [java] 56: ADD_I R7, R7, IConst: 1
+     [java] 57: GOTO BB6
+     [java] 
+     [java] BB10	(in: BB9, out: BB9)
+     [java] 62: INT_2LONG T11, R9
+     [java] 63: ADD_L T12, R6, T11
+     [java] 64: MOVE_L R6, T12
+     [java] 65: ADD_I R9, R9, IConst: 1
+     [java] 66: GOTO BB9
+     [java] 
+     [java] BB4	(in: BB3, out: BB3)
+     [java] 48: ASTORE_I R4, R2, R4
+     [java] 49: ADD_I R4, R4, IConst: 1
+     [java] 50: GOTO BB3

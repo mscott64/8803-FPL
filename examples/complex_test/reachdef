@@ -1,0 +1,172 @@
+Chord run initiated at: Sep 27, 2013 5:19:55 PM
+ENTER: reachdef at Fri Sep 27 17:19:57 EDT 2013
+********** reachdef analysis *********
+ENTER: RTA
+Iteration: 0
+Iteration: 1
+LEAVE: RTA
+Time: 00:00:00:184 hh:mm:ss:ms
+Control flow graph for main:([Ljava/lang/String;)V@ComplexTest:
+BB0 (ENTRY)	(in: <none>, out: BB2)
+
+BB2	(in: BB0 (ENTRY), out: BB3)
+1: NEWARRAY T1, IConst: 10000, int[]
+2: MOVE_A R2, T1
+3: NEWARRAY T1, IConst: 10000, long[]
+4: MOVE_A R3, T1
+5: MOVE_I R4, IConst: 0
+
+BB3	(in: BB2, BB4, out: BB4, BB5)
+36: ARRAYLENGTH T5, R2
+37: IFCMP_I R4, T5, GE, BB5
+
+BB5	(in: BB3, out: BB6)
+51: MOVE_L R6, LConst: 0
+52: MOVE_I R7, IConst: 0
+
+BB6	(in: BB5, BB13, out: BB7, BB14)
+60: ARRAYLENGTH T5, R2
+61: IFCMP_I R7, T5, GE, BB14
+
+BB14	(in: BB6, out: BB1 (EXIT))
+71: RETURN_V
+
+BB1 (EXIT)	(in: BB14, out: <none>)
+
+BB7	(in: BB6, out: BB8, BB12)
+68: ALOAD_I T8, R2, R7
+69: REM_I T8, T8, IConst: 2
+70: IFCMP_I T8, IConst: 0, NE, BB12
+
+BB12	(in: BB7, out: BB13)
+73: MOVE_L R6, LConst: 0
+
+BB8	(in: BB7, out: BB9)
+72: MOVE_I R9, IConst: 0
+
+BB9	(in: BB8, BB10, out: BB10, BB11)
+58: ALOAD_I T5, R2, R7
+59: IFCMP_I R9, T5, GE, BB11
+
+BB11	(in: BB9, out: BB13)
+67: GOTO BB13
+
+BB13	(in: BB11, BB12, out: BB6)
+55: ASTORE_L R6, R3, R7
+56: ADD_I R7, R7, IConst: 1
+57: GOTO BB6
+
+BB10	(in: BB9, out: BB9)
+62: INT_2LONG T11, R9
+63: ADD_L T12, R6, T11
+64: MOVE_L R6, T12
+65: ADD_I R9, R9, IConst: 1
+66: GOTO BB9
+
+BB4	(in: BB3, out: BB3)
+48: ASTORE_I R4, R2, R4
+49: ADD_I R4, R4, IConst: 1
+50: GOTO BB3
+
+Exception handlers: []
+Register factory: Registers: 13
+********** ENTER Analysis Results **********
+23!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:8) [48: ASTORE_I R4, R2, R4]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+67!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:15) [63: ADD_L T12, R6, T11]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+31!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:11) [51: MOVE_L R6, LConst: 0]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <51: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+66!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:15) [62: INT_2LONG T11, R9]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+16!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:7) [36: ARRAYLENGTH T5, R2]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+5!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:3) [2: MOVE_A R2, T1]
+	IN :<1: NEWARRAY T1, IConst: 10000, int[], T1> 
+	OUT:<2: MOVE_A R2, T1, R2> <1: NEWARRAY T1, IConst: 10000, int[], T1> 
+11!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:4) [4: MOVE_A R3, T1]
+	IN :<3: NEWARRAY T1, IConst: 10000, long[], T1> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <3: NEWARRAY T1, IConst: 10000, long[], T1> <2: MOVE_A R2, T1, R2> 
+45!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:13) [68: ALOAD_I T8, R2, R7]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <68: ALOAD_I T8, R2, R7, T8> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+17!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:7) [37: IFCMP_I R4, T5, GE, BB5]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+85!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:12) [56: ADD_I R7, R7, IConst: 1]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <58: ALOAD_I T5, R2, R7, T5> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+91!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:24) [71: RETURN_V]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+24!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:7) [49: ADD_I R4, R4, IConst: 1]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+47!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:13) [69: REM_I T8, T8, IConst: 2]
+	IN :<4: MOVE_A R3, T1, R3> <68: ALOAD_I T8, R2, R7, T8> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+48!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:13) [70: IFCMP_I T8, IConst: 0, NE, BB12]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+27!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:7) [50: GOTO BB3]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+3!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:3) [1: NEWARRAY T1, IConst: 10000, int[]]
+	IN :
+	OUT:<1: NEWARRAY T1, IConst: 10000, int[], T1> 
+68!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:15) [64: MOVE_L R6, T12]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> 
+72!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [66: GOTO BB9]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> 
+38!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:12) [60: ARRAYLENGTH T5, R2]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> <36: ARRAYLENGTH T5, R2, T5> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+84!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:21) [55: ASTORE_L R6, R3, R7]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <58: ALOAD_I T5, R2, R7, T5> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+59!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [58: ALOAD_I T5, R2, R7]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <58: ALOAD_I T5, R2, R7, T5> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <58: ALOAD_I T5, R2, R7, T5> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+33!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:12) [52: MOVE_I R7, IConst: 0]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <51: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+	OUT:<52: MOVE_I R7, IConst: 0, R7> <4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <3: NEWARRAY T1, IConst: 10000, long[], T1> <51: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> <36: ARRAYLENGTH T5, R2, T5> <2: MOVE_A R2, T1, R2> 
+75!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [67: GOTO BB13]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+69!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [65: ADD_I R9, R9, IConst: 1]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <58: ALOAD_I T5, R2, R7, T5> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> 
+52!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [72: MOVE_I R9, IConst: 0]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+79!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:18) [73: MOVE_L R6, LConst: 0]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+60!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:14) [59: IFCMP_I R9, T5, GE, BB11]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <2: MOVE_A R2, T1, R2> <63: ADD_L T12, R6, T11, T12> <72: MOVE_I R9, IConst: 0, R9> <52: MOVE_I R7, IConst: 0, R7> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+13!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:7) [5: MOVE_I R4, IConst: 0]
+	IN :<4: MOVE_A R3, T1, R3> <3: NEWARRAY T1, IConst: 10000, long[], T1> <2: MOVE_A R2, T1, R2> 
+	OUT:<4: MOVE_A R3, T1, R3> <3: NEWARRAY T1, IConst: 10000, long[], T1> <5: MOVE_I R4, IConst: 0, R4> <2: MOVE_A R2, T1, R2> 
+9!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:4) [3: NEWARRAY T1, IConst: 10000, long[]]
+	IN :<1: NEWARRAY T1, IConst: 10000, int[], T1> <2: MOVE_A R2, T1, R2> 
+	OUT:<3: NEWARRAY T1, IConst: 10000, long[], T1> <2: MOVE_A R2, T1, R2> 
+88!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:12) [57: GOTO BB6]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <69: REM_I T8, T8, IConst: 2, T8> <60: ARRAYLENGTH T5, R2, T5> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <58: ALOAD_I T5, R2, R7, T5> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+39!main:([Ljava/lang/String;)V@ComplexTest (ComplexTest.java:12) [61: IFCMP_I R7, T5, GE, BB14]
+	IN :<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <5: MOVE_I R4, IConst: 0, R4> <73: MOVE_L R6, LConst: 0, R6> 
+	OUT:<4: MOVE_A R3, T1, R3> <49: ADD_I R4, R4, IConst: 1, R4> <64: MOVE_L R6, T12, R6> <51: MOVE_L R6, LConst: 0, R6> <60: ARRAYLENGTH T5, R2, T5> <69: REM_I T8, T8, IConst: 2, T8> <63: ADD_L T12, R6, T11, T12> <2: MOVE_A R2, T1, R2> <52: MOVE_I R7, IConst: 0, R7> <72: MOVE_I R9, IConst: 0, R9> <62: INT_2LONG T11, R9, T11> <3: NEWARRAY T1, IConst: 10000, long[], T1> <65: ADD_I R9, R9, IConst: 1, R9> <56: ADD_I R7, R7, IConst: 1, R7> <73: MOVE_L R6, LConst: 0, R6> <5: MOVE_I R4, IConst: 0, R4> 
+********** LEAVE Analysis Results **********
+LEAVE: reachdef
+Exclusive time: 00:00:00:212 hh:mm:ss:ms
+Inclusive time: 00:00:00:212 hh:mm:ss:ms
+Chord run completed at: Sep 27, 2013 5:19:57 PM
+Total time: 00:00:01:928 hh:mm:ss:ms
