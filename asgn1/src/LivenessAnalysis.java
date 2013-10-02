@@ -55,9 +55,10 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		int count = 0;
 		boolean changed = true;
 		
-		while(changed) {
+		while(changed || count < 2) {
 			count++;
 			changed = false;
+			System.out.println("Iteration " + count + "...");
 			
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
 				List<BasicBlock> preds = bb.getPredecessors();
@@ -68,17 +69,26 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
-					for(RegisterOperand ro : def)
-						in.add(ro.getRegister());
-					for(RegisterOperand ro : used)
-						out.add(ro.getRegister());
+					System.out.println(q.toString());
+					for(RegisterOperand ro : def) {
+						Register r = ro.getRegister();
+						in.add(r);//o.getRegister());
+						System.out.println("\t" + ro.toString() + " " + r.getNumber());
+					}
+					for(RegisterOperand ro : used) {
+						Register r = ro.getRegister();
+						out.add(r);//o.getRegister());
+						System.out.println("\t" + ro.toString() + " " + r.getNumber());
+					}
 					
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
 					
-					if(prev_in == null || (prev_in != null && prev_in.equals(in)) ||
-							prev_out == null || (prev_out != null && prev_out.equals(out)))
+					if(prev_in == null || setEquals(prev_in, in) ||
+							prev_out == null || setEquals(prev_out, out)) {
+						System.out.println("Changed");
 						changed = true;
+					}
 				}
 			}
 		}
