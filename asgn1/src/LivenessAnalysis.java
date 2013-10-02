@@ -66,7 +66,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				
 				iter = bb.backwardIterator();
 				while(iter.hasNext()) {
-					Quad q = iter.next();
+					Quad q = iter.nextQuad();
 					System.out.println(q.toString());
 //					Set<Register> out = new HashSet<Register>();
 //					Set<Register> in = new HashSet<Register>();
