@@ -44,20 +44,20 @@ public abstract class DataflowAnalysis<T> extends JavaAnalysis {
 
 	public abstract void doAnalysis();
 	
-	public static boolean setEquals(Set<T> set1, Set<T> set2) {
+	public boolean setEquals(Set<T> set1, Set<T> set2) {
 		
 		if(set1.size() != set2.size()) 
 			return false;
 		
 		for(T t : set1) {
-			if(!setContains(r, set2))
+			if(!setContains(t, set2))
 				return false;
 		}
 		
 		return true;
 	}
 	
-	public static boolean setContains(T t, Set<T> s) {
+	public boolean setContains(T t, Set<T> s) {
 		
 		if(s.isEmpty())
 			return false;
