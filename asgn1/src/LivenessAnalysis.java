@@ -56,11 +56,17 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		ControlFlowGraph cfg = main.getCFG();
 		
 		int count = 1;
-		for(BasicBlock bb : cfg.reversePostOrder()) {
+		for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
 			for(Quad q : bb.getQuads()) {
 				List<RegisterOperand> def = q.getDefinedRegisters();
 				List<RegisterOperand> used = q.getUsedRegisters();
-				System.out.println(q.toString() + " " + count++);
+				System.out.println(count++ + " " + q.toString());
+				for(RegisterOperand ro : def)
+					System.out.print(ro.toString() + " ");
+				System.out.println(" ");
+				for(RegisterOperand ro : used)
+					System.out.print(ro.toString() + " ");
+				System.out.println(" ");
 			}
 		}
 	}
