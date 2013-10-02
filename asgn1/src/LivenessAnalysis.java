@@ -53,7 +53,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		ControlFlowGraph cfg = main.getCFG();
 		
 		int count = 0;
-		bool changed = true;
+		boolean changed = true;
 		
 		while(changed) {
 			count++;
@@ -63,8 +63,8 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				List<BasicBlock> preds = bb.getPredecessors();
 				
 				for(Quad q : bb.getQuads()) {
-					Set<RegisterOperand> out = new Set<RegisterOperand>();
-					Set<RegisterOperand> in = new Set<RegisterOperand>();
+					Set<RegisterOperand> out = new HashSet<RegisterOperand>();
+					Set<RegisterOperand> in = new HashSet<RegisterOperand>();
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
