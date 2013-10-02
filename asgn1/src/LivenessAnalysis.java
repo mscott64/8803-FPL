@@ -56,13 +56,13 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		boolean changed = true;
 		List<Quad> quads;
 		
-		while(changed && count < 2) {
+		while(changed) {
 			count++;
 			changed = false;
 			System.out.println("Iteration " + count + "...");
 			
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
-				//List<BasicBlock> preds = bb.getPredecessors();
+				List<BasicBlock> preds = bb.getPredecessors();
 				
 				quads = bb.getQuads();
 				for(int i = quads.size() - 1; i >= 0; i--) {
@@ -82,10 +82,8 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
 					
-					if(!setEquals(prev_in, in) || !setEquals(prev_out, out)) {
-						System.out.println("Changed--" + q.toString());
+					if(!setEquals(prev_in, in) || !setEquals(prev_out, out)) 
 						changed = true;
-					}
 				}
 			}
 		}
