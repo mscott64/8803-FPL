@@ -63,15 +63,15 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				List<BasicBlock> preds = bb.getPredecessors();
 				
 				for(Quad q : bb.getQuads()) {
-					Set<RegisterOperand> out = new HashSet<RegisterOperand>();
-					Set<RegisterOperand> in = new HashSet<RegisterOperand>();
+					Set<Register> out = new HashSet<Register>();
+					Set<Register> in = new HashSet<Register>();
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
 					for(RegisterOperand ro : def)
-						in.add(ro);
+						in.add(ro.getRegister());
 					for(RegisterOperand ro : used)
-						out.add(ro);
+						out.add(ro.getRegister());
 					
 					Set<RegisterOperand> prev_in = inMap.put(q, in);
 					Set<RegisterOperand> prev_out = outMap.put(q, out);
