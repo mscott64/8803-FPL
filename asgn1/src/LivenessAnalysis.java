@@ -55,12 +55,12 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 			throw new RuntimeException("Method " + main + " is abstract");
 		ControlFlowGraph cfg = main.getCFG();
 		
-		int count = 0;
+		int count = 1;
 		for(BasicBlock bb : cfg.reversePostOrder()) {
 			for(Quad q : bb.getQuads()) {
 				List<RegisterOperand> def = q.getDefinedRegisters();
 				List<RegisterOperand> used = q.getUsedRegisters();
-				System.out.println(q.toString() + " " + count);
+				System.out.println(q.toString() + " " + count++);
 			}
 		}
 	}
