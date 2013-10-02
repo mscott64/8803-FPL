@@ -64,26 +64,26 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				List<BasicBlock> preds = bb.getPredecessors();
 				
 				for(Quad q : bb.getQuads()) {
-					Set<Register> out = new HashSet<Register>();
-					Set<Register> in = new HashSet<Register>();
-					List<RegisterOperand> def = q.getDefinedRegisters();
-					List<RegisterOperand> used = q.getUsedRegisters();
-					
 					System.out.println(q.toString());
-					for(RegisterOperand ro : def) 
-						in.add(ro.getRegister());
-					
-					for(RegisterOperand ro : used) 
-						out.add(ro.getRegister());
-					
-					Set<Register> prev_in = inMap.put(q, in);
-					Set<Register> prev_out = outMap.put(q, out);
-					
-					if(prev_in == null || setEquals(prev_in, in) ||
-							prev_out == null || setEquals(prev_out, out)) {
-						System.out.println("Changed--" + q.toString());
-						changed = true;
-					}
+//					Set<Register> out = new HashSet<Register>();
+//					Set<Register> in = new HashSet<Register>();
+//					List<RegisterOperand> def = q.getDefinedRegisters();
+//					List<RegisterOperand> used = q.getUsedRegisters();
+//					
+//					for(RegisterOperand ro : def) 
+//						in.add(ro.getRegister());
+//					
+//					for(RegisterOperand ro : used) 
+//						out.add(ro.getRegister());
+//					
+//					Set<Register> prev_in = inMap.put(q, in);
+//					Set<Register> prev_out = outMap.put(q, out);
+//					
+//					if(prev_in == null || setEquals(prev_in, in) ||
+//							prev_out == null || setEquals(prev_out, out)) {
+//						System.out.println("Changed--" + q.toString());
+//						changed = true;
+//					}
 				}
 			}
 		}
