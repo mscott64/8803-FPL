@@ -5,7 +5,7 @@ import chord.program.Program;
 import joeq.Class.jq_Method;
 import joeq.Compiler.Quad.*;
 import joeq.Compiler.Quad.RegisterFactory.Register;
-import joeq.Compiler.Quad.Operand.RegisterOperand;
+import joeq.Util.Templates.List.*;
 
 import java.util.HashMap;
 import java.util.Map;
