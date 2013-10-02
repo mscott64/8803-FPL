@@ -73,29 +73,17 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
-					System.out.println(q.toString());
-					System.out.print("\tdef(in): ");
-					for(RegisterOperand ro : def) {
-						Register r = ro.getRegister();
-						in.add(r);//o.getRegister());
-						System.out.print(r.toString() + " ");
-					}
-					System.out.println("");
+					for(RegisterOperand ro : def) 
+						in.add(ro.getRegister());
 					
-					System.out.print("\tused(out): ");
-					for(RegisterOperand ro : used) {
-						Register r = ro.getRegister();
-						out.add(r);//o.getRegister());
-						System.out.print(r.toString() + " ");
-					}
-					System.out.println("");
+					for(RegisterOperand ro : used)
+						out.add(ro.getRegister());
 					
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
 					
-					if(prev_in == null || setEquals(prev_in, in) ||
-							prev_out == null || setEquals(prev_out, out)) {
-						System.out.println("Changed");
+					if(!setEquals(prev_in, in) || !setEquals(prev_out, out)) {
+						System.out.println("Changed--" + q.toString());
 						changed = true;
 					}
 				}
@@ -106,6 +94,12 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 	
 	public boolean setEquals(Set<Register> set1, Set<Register> set2) {
 		
+		if(set1 == null)
+			return set2 == null;
+		
+		if(set2 == null)
+			return set1 == null;
+			
 		if(set1.size() != set2.size()) 
 			return false;
 		
