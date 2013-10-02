@@ -73,8 +73,8 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					for(RegisterOperand ro : used)
 						out.add(ro.getRegister());
 					
-					Set<RegisterOperand> prev_in = inMap.put(q, in);
-					Set<RegisterOperand> prev_out = outMap.put(q, out);
+					Set<Register> prev_in = inMap.put(q, in);
+					Set<Register> prev_out = outMap.put(q, out);
 					
 					if(prev_in == null || (prev_in != null && prev_in.equals(in)) ||
 							prev_out == null || (prev_out != null && prev_out.equals(out)))
