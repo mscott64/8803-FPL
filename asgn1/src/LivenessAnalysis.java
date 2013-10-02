@@ -1,5 +1,11 @@
 import chord.project.Chord;
 import joeq.Compiler.Quad.RegisterFactory.Register;
+import joeq.Compile.Quad;
+import joeq.Compile.Quad.BasicBlock;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @Chord(name="liveness")
 public class LivenessAnalysis extends DataflowAnalysis<Register> {
@@ -38,6 +44,17 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		// Note: This is a single procedure analysis; you do not need to
 		// consult any pointer analysis, call graph, or any method of the given
 		// program besides the provided main method.
+		
+		main = Program.g().getMainMethod();
+		if (main.isAbstract())
+			throw new RuntimeException("Method " + main + " is abstract");
+		ControlFlowGraph cfg = main.getCFG();
+		
+		for(BasicBlock bb : cfg.reversePostOrder()) {
+			for(Quad q : bb.getQuads()) {
+				System.out.println(q.toString());
+			}
+		}
 	}
 }
 
