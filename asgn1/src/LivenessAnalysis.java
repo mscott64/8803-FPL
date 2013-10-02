@@ -55,20 +55,37 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 			throw new RuntimeException("Method " + main + " is abstract");
 		ControlFlowGraph cfg = main.getCFG();
 		
-		int count = 1;
-		for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
-			for(Quad q : bb.getQuads()) {
-				List<RegisterOperand> def = q.getDefinedRegisters();
-				List<RegisterOperand> used = q.getUsedRegisters();
-				System.out.println(count++ + " " + q.toString());
-				for(RegisterOperand ro : def)
-					System.out.print(ro.toString() + " ");
-				System.out.println(" ");
-				for(RegisterOperand ro : used)
-					System.out.print(ro.toString() + " ");
-				System.out.println(" ");
+		int count = 0;
+		bool changed = true;
+		
+		while(changed) {
+			count++;
+			changed = false;
+			
+			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
+				List<BasicBlock> preds = bb.getPredecessors();
+				
+				for(Quad q : bb.getQuads()) {
+					Set<RegisterOperand> out = new Set<RegisterOperand>();
+					Set<RegisterOperand> in = new Set<RegisterOperand>();
+					List<RegisterOperand> def = q.getDefinedRegisters();
+					List<RegisterOperand> used = q.getUsedRegisters();
+					
+					for(RegisterOperand ro : def)
+						in.add(ro);
+					for(RegisterOperand ro : used)
+						out.add(ro);
+					
+					Set<RegisterOperand> prev_in = inMap.put(q, in);
+					Set<RegisterOperand> prev_out = outMap.put(q, out);
+					
+					if(prev_in == null || (prev_in != null && prev_in.equals(in)) ||
+							prev_out == null || (prev_out != null && prev_out.equals(out)))
+						changed = true;
+				}
 			}
 		}
+		System.out.println("Finished after " + count + " iterations.");
 	}
 }
 
