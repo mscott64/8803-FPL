@@ -128,7 +128,7 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 		
 		for(RegisterOperand ro : def) {
 			for(Pair<Quad,Register> p : set) {
-				if(p.val0.equals(ro.getRegister()))
+				if(p.val1.equals(ro.getRegister()))
 					set.remove(p);
 			}
 		}
