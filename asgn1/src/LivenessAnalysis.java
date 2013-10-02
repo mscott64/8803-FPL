@@ -55,7 +55,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		int count = 0;
 		boolean changed = true;
 		
-		while(changed || count < 2) {
+		while(changed && count < 2) {
 			count++;
 			changed = false;
 			System.out.println("Iteration " + count + "...");
