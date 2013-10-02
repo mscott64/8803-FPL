@@ -73,12 +73,12 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					for(RegisterOperand ro : def) {
 						Register r = ro.getRegister();
 						in.add(r);//o.getRegister());
-						System.out.println("\t" + ro.toString() + " " + r.getNumber());
+						System.out.println("\t def:" + ro.toString() + " " + r.getNumber());
 					}
 					for(RegisterOperand ro : used) {
 						Register r = ro.getRegister();
 						out.add(r);//o.getRegister());
-						System.out.println("\t" + ro.toString() + " " + r.getNumber());
+						System.out.println("\t used:" + ro.toString() + " " + r.getNumber());
 					}
 					
 					Set<Register> prev_in = inMap.put(q, in);
@@ -114,7 +114,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 			return false;
 		
 		for(Register curr : s)
-			if(r.getNumber() == curr.getNumber())
+			if(r.toString().equals(curr.toString()))
 				return true;
 		
 		return false;
