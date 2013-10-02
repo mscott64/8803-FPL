@@ -126,10 +126,17 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 	
 	private Set<Pair<Quad,Register>> removeKilled(Set<Pair<Quad,Register>> set, List<RegisterOperand> def) {
 		
+		int pos = set.size() - 1;
 		for(RegisterOperand ro : def) {
-			for(Pair<Quad,Register> p : set) {
-				if(p.val1.equals(ro.getRegister()))
-					set.remove(p);
+			while(pos != 0) {
+				for(Pair<Quad,Register> p : set) {
+					pos--;
+					if(p.val1.equals(ro.getRegister())) {
+						set.remove(p);
+						pos = set.size();
+						break;
+					}
+				}
 			}
 		}
 		
