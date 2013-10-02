@@ -56,38 +56,37 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		boolean changed = true;
 		List<Quad> quads;
 		
-		while(changed && count <= 2) {
+		while(changed && count < 2) {
 			count++;
-			//changed = false;
+			changed = false;
 			System.out.println("Iteration " + count + "...");
 			
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
 				//List<BasicBlock> preds = bb.getPredecessors();
 				
 				quads = bb.getQuads();
-				System.out.println(bb.toString());
 				for(int i = quads.size() - 1; i >= 0; i--) {
 					Quad q = quads.get(i);
-					System.out.println(q.toString());
-//					Set<Register> out = new HashSet<Register>();
-//					Set<Register> in = new HashSet<Register>();
-//					List<RegisterOperand> def = q.getDefinedRegisters();
-//					List<RegisterOperand> used = q.getUsedRegisters();
-//					
-//					for(RegisterOperand ro : def) 
-//						in.add(ro.getRegister());
-//					
-//					for(RegisterOperand ro : used) 
-//						out.add(ro.getRegister());
-//					
-//					Set<Register> prev_in = inMap.put(q, in);
-//					Set<Register> prev_out = outMap.put(q, out);
-//					
-//					if(prev_in == null || setEquals(prev_in, in) ||
-//							prev_out == null || setEquals(prev_out, out)) {
-//						System.out.println("Changed--" + q.toString());
-//						changed = true;
-//					}
+					
+					Set<Register> out = new HashSet<Register>();
+					Set<Register> in = new HashSet<Register>();
+					List<RegisterOperand> def = q.getDefinedRegisters();
+					List<RegisterOperand> used = q.getUsedRegisters();
+					
+					for(RegisterOperand ro : def) 
+						in.add(ro.getRegister());
+					
+					for(RegisterOperand ro : used) 
+						out.add(ro.getRegister());
+					
+					Set<Register> prev_in = inMap.put(q, in);
+					Set<Register> prev_out = outMap.put(q, out);
+					
+					if(prev_in == null || setEquals(prev_in, in) ||
+							prev_out == null || setEquals(prev_out, out)) {
+						System.out.println("Changed--" + q.toString());
+						changed = true;
+					}
 				}
 			}
 		}
