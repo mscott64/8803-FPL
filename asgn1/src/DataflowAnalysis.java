@@ -10,6 +10,7 @@ import joeq.Class.jq_Method;
 import joeq.Compiler.Quad.ControlFlowGraph;
 import joeq.Compiler.Quad.BasicBlock;
 import joeq.Compiler.Quad.Quad;
+import joeq.Compiler.Quad.RegisterFactory.Register;
 
 public abstract class DataflowAnalysis<T> extends JavaAnalysis {
 	protected final Map<Quad, Set<T>> inMap  = new HashMap<Quad, Set<T>>();
@@ -43,30 +44,5 @@ public abstract class DataflowAnalysis<T> extends JavaAnalysis {
 	}
 
 	public abstract void doAnalysis();
-	
-	public boolean setEquals(Set<T> set1, Set<T> set2) {
-		
-		if(set1.size() != set2.size()) 
-			return false;
-		
-		for(T t : set1) {
-			if(!setContains(t, set2))
-				return false;
-		}
-		
-		return true;
-	}
-	
-	public boolean setContains(T t, Set<T> s) {
-		
-		if(s.isEmpty())
-			return false;
-		
-		for(T curr : s)
-			if(t.getNumber() == curr.getNumber())
-				return true;
-		
-		return false;
-	}
 }
 
