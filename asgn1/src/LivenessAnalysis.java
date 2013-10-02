@@ -54,20 +54,20 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		
 		int count = 0;
 		boolean changed = true;
-		//Iterator iter;
+		List<Quad> quads;
 		
 		while(changed && count <= 2) {
 			count++;
-			changed = false;
+			//changed = false;
 			System.out.println("Iteration " + count + "...");
 			
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
 				//List<BasicBlock> preds = bb.getPredecessors();
 				
-				//iter = bb.backwardIterator();
+				quads = bb.getQuads();
 				System.out.println(bb.toString());
-				for(Quad q : bb.getQuads()) {
-					//Quad q = iter.nextQuad();
+				for(int i = quads.size() - 1; i >= 0; i--) {
+					Quad q = quads.get(i);
 					System.out.println(q.toString());
 //					Set<Register> out = new HashSet<Register>();
 //					Set<Register> in = new HashSet<Register>();
