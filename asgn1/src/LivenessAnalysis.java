@@ -1,8 +1,11 @@
 import chord.project.Chord;
+import chord.project.analyses.JavaAnalysis;
+import chord.program.Program;
+
+import joeq.Class.jq_Method;
+import joeq.Compiler.Quad.*;
 import joeq.Compiler.Quad.RegisterFactory.Register;
-import joeq.Compile.Quad;
-import joeq.Compile.Quad.BasicBlock;
-import joeq.Util.Templates;
+import joeq.Compiler.Quad.RegisterOperand;
 
 import java.util.HashMap;
 import java.util.Map;
