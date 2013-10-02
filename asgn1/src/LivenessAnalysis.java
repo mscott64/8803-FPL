@@ -73,18 +73,29 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
-					for(RegisterOperand ro : def) 
-						in.add(ro.getRegister());
+					System.out.println(q.toString());
+					System.out.print("\tdef(in): ");
+					for(RegisterOperand ro : def) {
+						Register r = ro.getRegister();
+						in.add(r);//o.getRegister());
+						System.out.print(r.toString() + " ");
+					}
+					System.out.println("");
 					
-					for(RegisterOperand ro : used) 
-						out.add(ro.getRegister());
+					System.out.print("\tused(out): ");
+					for(RegisterOperand ro : used) {
+						Register r = ro.getRegister();
+						out.add(r);//o.getRegister());
+						System.out.print(r.toString() + " ");
+					}
+					System.out.println("");
 					
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
 					
 					if(prev_in == null || setEquals(prev_in, in) ||
 							prev_out == null || setEquals(prev_out, out)) {
-						System.out.println("Changed--" + q.toString());
+						System.out.println("Changed");
 						changed = true;
 					}
 				}
