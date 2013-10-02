@@ -1,11 +1,14 @@
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import chord.project.Chord;
 import chord.util.tuple.object.Pair;
-import joeq.Compiler.Quad.Quad;
+import chord.project.analyses.JavaAnalysis;
+import chord.program.Program;
+
+import joeq.Class.jq_Method;
+import joeq.Compiler.Quad.*;
 import joeq.Compiler.Quad.RegisterFactory.Register;
+import joeq.Compiler.Quad.Operand.RegisterOperand;
 
 @Chord(name="reachdef")
 public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
