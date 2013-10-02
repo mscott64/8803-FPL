@@ -2,6 +2,7 @@ import chord.project.Chord;
 import joeq.Compiler.Quad.RegisterFactory.Register;
 import joeq.Compile.Quad;
 import joeq.Compile.Quad.BasicBlock;
+import joeq.Util.Templates;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,8 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		
 		for(BasicBlock bb : cfg.reversePostOrder()) {
 			for(Quad q : bb.getQuads()) {
+				RegisterOperand def = q.getDefinedRegisters();
+				RegisterOperand used = q.getUsedRegisters();
 				System.out.println(q.toString());
 			}
 		}
