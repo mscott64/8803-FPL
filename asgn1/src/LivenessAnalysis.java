@@ -7,10 +7,7 @@ import joeq.Compiler.Quad.*;
 import joeq.Compiler.Quad.RegisterFactory.Register;
 import joeq.Compiler.Quad.Operand.RegisterOperand;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.List;
+import java.util.*;
 
 @Chord(name="liveness")
 public class LivenessAnalysis extends DataflowAnalysis<Register> {
