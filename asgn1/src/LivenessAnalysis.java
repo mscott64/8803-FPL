@@ -58,6 +58,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		List<Quad> quads;
 		Set<Register> out, in;
 		
+		System.out.println("Begin analysis...");
 		while(changed) {
 			count++;
 			changed = false;
@@ -101,7 +102,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				}
 			}
 		}
-		System.out.println("Finished after " + count + " iterations.");
+		System.out.println("Analysis finished after " + count + " iterations.");
 	}
 	
 	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, boolean last, int index) {
