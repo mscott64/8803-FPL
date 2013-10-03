@@ -77,7 +77,7 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 					
 					// Union of exit of predecessors
 					for(Quad pred_q : preds) {
-						HashSet<Pair<Quad,Register>> set = outMap.get(pred_q);
+						Set<Pair<Quad,Register>> set = outMap.get(pred_q);
 						if(set != null)
 							in.addAll(set);
 					}
