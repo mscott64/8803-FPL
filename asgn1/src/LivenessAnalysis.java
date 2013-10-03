@@ -154,11 +154,12 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 	private Set<Register> setRemove(Register r, Set<Register> in) {
 		
 		String r_str = r.toString();
-		for(Register curr : in) 
+		for(Register curr : in) {
 			if(r_str.equals(curr.toString())) {
 				in.remove(curr);
 				return in;
 			}
+		}
 		
 		return in;
 }
