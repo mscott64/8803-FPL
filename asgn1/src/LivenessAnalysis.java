@@ -87,7 +87,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					in.addAll(out);
 					// Remove kill set
 					for(RegisterOperand ro : def) 
-						in = setRemove(ro.getRegister(), in);
+						in.remove(ro.getRegister());// = setRemove(ro.getRegister(), in);
 					
 					// Add gen set
 					for(RegisterOperand ro : used)
@@ -96,45 +96,12 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
 					
-					//if(!setEquals(prev_in, in) || !setEquals(prev_out, out))
 					if(prev_in == null || (prev_in != null && !prev_in.equals(in)) || prev_out == null || (prev_out != null && !prev_out.equals(out)))
 						changed = true;
 				}
 			}
 		}
 		System.out.println("Finished after " + count + " iterations.");
-	}
-	
-	private boolean setEquals(Set<Register> set1, Set<Register> set2) {
-		
-		if(set1 == null)
-			return set2 == null;
-		
-		if(set2 == null)
-			return set1 == null;
-			
-		if(set1.size() != set2.size()) 
-			return false;
-		
-		for(Register r : set1) {
-			if(!setContains(r, set2))
-				return false;
-		}
-		
-		return true;
-	}
-	
-	private boolean setContains(Register r, Set<Register> s) {
-		
-		if(s.isEmpty())
-			return false;
-		
-		String r_str = r.toString();
-		for(Register curr : s)
-			if(r_str.equals(curr.toString()))
-				return true;
-		
-		return false;
 	}
 	
 	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, boolean last, int index) {
