@@ -134,17 +134,19 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		return false;
 	}
 	
-	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, List<Quad> quads, boolean last, int index) {
+	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, boolean last, int index) {
 		
 		Set<Quad> succs = new HashSet<Quad>();
 		
 		if(last) {
 			for(BasicBlock succ_bb : bb.getSuccessors()) 
-				succs.add(succ_bb.getQuad(0));
+				if(succ_bb.size() > 0)
+					succs.add(succ_bb.getQuad(0));
+			
 			return succs;
 		}
 		
-		succs.add(quads.get(index + 1));
+		succs.add(bb.getQuad(index + 1));
 		return succs;
 	}
 	
