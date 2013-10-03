@@ -69,7 +69,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 				last = true;
 				for(int i = quads.size() - 1; i >= 0; i--) {
 					Quad q = quads.get(i);
-					Set<Quad> succs = getSuccessors(q, bb, quads, last, i); 
+					Set<Quad> succs = getSuccessors(q, bb, last, i); 
 					last = false;
 					
 					out = new HashSet<Register>();
