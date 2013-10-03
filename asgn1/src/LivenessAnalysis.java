@@ -54,7 +54,9 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		
 		int count = 0;
 		boolean changed = true;
+		boolean last = true;
 		List<Quad> quads;
+		Set<Register> out, in;
 		
 		while(changed) {
 			count++;
@@ -62,22 +64,35 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 			System.out.println("Iteration " + count + "...");
 			
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
-				List<BasicBlock> preds = bb.getPredecessors();
 				
 				quads = bb.getQuads();
+				last = true;
 				for(int i = quads.size() - 1; i >= 0; i--) {
 					Quad q = quads.get(i);
+					Set<Quad> succs = getSuccessors(q, bb, last, i); 
+					last = false;
 					
-					Set<Register> out = new HashSet<Register>();
-					Set<Register> in = new HashSet<Register>();
+					out = new HashSet<Register>();
+					in = new HashSet<Register>();
+					
+					// Union of entry of successors
+					for(Quad succ_q : succs) {
+						out.addAll(in_map.get(succ_q));
+					}
+					
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
 					
-					for(RegisterOperand ro : def) 
-						in.add(ro.getRegister());
+					in.addAll(out);
+					// Remove kill set
+					for(RegisterOperand ro : def) {
+						in = setRemove(ro.getRegister(), in);
+					}
 					
-					for(RegisterOperand ro : used)
-						out.add(ro.getRegister());
+					// Add gen set
+					for(RegisterOperand ro : used) {
+						in.add(ro.getRegister());
+					}
 					
 					Set<Register> prev_in = inMap.put(q, in);
 					Set<Register> prev_out = outMap.put(q, out);
@@ -90,7 +105,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		System.out.println("Finished after " + count + " iterations.");
 	}
 	
-	public boolean setEquals(Set<Register> set1, Set<Register> set2) {
+	private boolean setEquals(Set<Register> set1, Set<Register> set2) {
 		
 		if(set1 == null)
 			return set2 == null;
@@ -109,16 +124,42 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		return true;
 	}
 	
-	public boolean setContains(Register r, Set<Register> s) {
+	private boolean setContains(Register r, Set<Register> s) {
 		
 		if(s.isEmpty())
 			return false;
 		
+		String r_str = r.toString();
 		for(Register curr : s)
-			if(r.toString().equals(curr.toString()))
+			if(r_str.equals(curr.toString()))
 				return true;
 		
 		return false;
 	}
+	
+	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, boolean last, int index) {
+		
+		Set<Quad> succs = new HashSet<Quad>();
+		
+		if(last) {
+			for(BasicBlock succ_bb : bb.getSuccessors()) 
+				succs.add(succ_bb.getQuad(0));
+			return succs;
+		}
+		
+		succs.add(bb.getQuad(index + 1));
+		return succs;
+	}
+	
+	private Set<Register> setRemove(Register r, Set<Register> in) {
+		
+		String r_str = r.toString();
+		for(Register curr : in) 
+			if(r_str.equals(curr.toString())) {
+				in.remove(curr);
+				return in;
+			}
+		
+		return in;
 }
 
