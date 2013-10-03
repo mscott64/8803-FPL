@@ -134,7 +134,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		return false;
 	}
 	
-	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, List<Quads> quads, boolean last, int index) {
+	private Set<Quad> getSuccessors(Quad q, BasicBlock bb, List<Quad> quads, boolean last, int index) {
 		
 		Set<Quad> succs = new HashSet<Quad>();
 		
