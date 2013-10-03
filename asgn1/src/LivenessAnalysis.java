@@ -100,8 +100,8 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					Set<Register> prev_out = outMap.put(q, out);
 					
 					// Reiterate over everything if changes occurred
-					if(prev_in == null || (prev_in != null && !prev_in.equals(in)) || 
-							prev_out == null || (prev_out != null && !prev_out.equals(out)))
+					if(!changed && (prev_in == null || (prev_in != null && !prev_in.equals(in)) || 
+							prev_out == null || (prev_out != null && !prev_out.equals(out))))
 						changed = true;
 				}
 			}
