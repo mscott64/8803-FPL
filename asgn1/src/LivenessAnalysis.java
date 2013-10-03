@@ -56,7 +56,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		boolean changed = true;
 		boolean last = true;
 		List<Quad> quads;
-		Set<Register> out, in;
+		Set<Register> in, out;
 		
 		System.out.println("Begin analysis...");
 		while(changed) {
@@ -64,6 +64,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 			changed = false;
 			System.out.println("Iteration " + count + "...");
 			
+			// Backwards traversal
 			for(BasicBlock bb : cfg.reversePostOrderOnReverseGraph()) {
 				
 				quads = bb.getQuads();
@@ -78,8 +79,9 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					
 					// Union of entry of successors
 					for(Quad succ_q : succs) {
-						if(inMap.get(succ_q) != null)
-							out.addAll(inMap.get(succ_q));
+						Set<Register> set = inMap.get(succ_q);
+						if(set != null)
+							out.addAll(set);
 					}
 					
 					List<RegisterOperand> def = q.getDefinedRegisters();

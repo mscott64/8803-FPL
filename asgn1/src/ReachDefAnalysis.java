@@ -50,5 +50,86 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 		// consult any pointer analysis, call graph, or any method of the given
 		// program besides the provided main method.
 		
+		main = Program.g().getMainMethod();
+		if (main.isAbstract())
+			throw new RuntimeException("Method " + main + " is abstract");
+		ControlFlowGraph cfg = main.getCFG();
+		
+		int count = 0;
+		boolean changed = true;
+		boolean last = true;
+		List<Quad> quads;
+		Set<Pair<Quad,Register>> in, out;
+		
+		System.out.println("Begin analysis...");
+		while(changed) {
+			count++;
+			changed = false;
+			System.out.println("Iteration " + count + "...");
+			
+			for(BasicBlock bb : cfg.reversePostOrder()) {
+				for(Quad q : bb.getQuads()) {
+					
+					Set<Quad> preds = getPredecessors(q, bb);
+					
+					in = new HashSet<Pair<Quad,Register>>();
+					out = new HashSet<Pair<Quad,Register>>();
+					
+					// Union of exit of predecessors
+					for(Quad pred_q : preds) {
+						HashSet<Pair<Quad,Register>>() set = outMap.get(pred_q);
+						if(set != null)
+							in.addAll(set);
+					}
+					
+					List<RegisterOperand> def = q.getDefinedRegisters();
+					
+					out.addAll(in);
+					// Remove kill set
+					out = removeKilled(out, def);
+					
+					// Add gen set
+					for(RegisterOperand ro : def) {
+						out.add(new Pair(q,ro.getRegister()));
+					}
+					
+					Set<Pair<Quad,Register>> prev_in = inMap.put(q, in);
+					Set<Pair<Quad,Register>> prev_out = outMap.put(q, out);
+					
+					if(prev_in == null || (prev_in != null && !prev_in.equals(in)) || prev_out == null || (prev_out != null && !prev_out.equals(out)))
+						changed = true;
+				}
+			}
+		}
+		System.out.println("Analysis finished after " + count + " iterations.");
+	}
+	
+	private Set<Quad> getPredecessors(Quad q, BasicBlock bb) {
+		
+		int index = bb.getQuadIndex(q);
+		Set<Quad> preds = new HashSet<Quad>();
+		
+		if(index == 0) {
+			for(BasicBlock pred_bb : bb.getPredecessors())
+				if(pred_bb.size() > 0)
+					preds.add(bb.getLastQuad());
+			
+			return preds;
+		}
+		
+		preds.add(bb.getQuad(index - 1));
+		return preds;
+	}
+	
+	private Set<Pair<Quad,Register>> removeKilled(Set<Pair<Quad,Register>> set, List<RegisterOperand> def) {
+		
+		for(RegisterOperand ro : def) {
+			for(Pair<Quad,Register> p : set) {
+				if(p.val0.equals(ro.getRegister()))
+					set.remove(p);
+			}
+		}
+		
+		return set;
 	}
 }
