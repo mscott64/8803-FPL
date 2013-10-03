@@ -67,6 +67,7 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 			changed = false;
 			System.out.println("Iteration " + count + "...");
 			
+			// Forward traversal
 			for(BasicBlock bb : cfg.reversePostOrder()) {
 				for(Quad q : bb.getQuads()) {
 					
@@ -96,7 +97,9 @@ public class ReachDefAnalysis extends DataflowAnalysis<Pair<Quad, Register>> {
 					Set<Pair<Quad,Register>> prev_in = inMap.put(q, in);
 					Set<Pair<Quad,Register>> prev_out = outMap.put(q, out);
 					
-					if(prev_in == null || (prev_in != null && !prev_in.equals(in)) || prev_out == null || (prev_out != null && !prev_out.equals(out)))
+					// Reiterate over everything if changes occurred
+					if(prev_in == null || (prev_in != null && !prev_in.equals(in)) || 
+							prev_out == null || (prev_out != null && !prev_out.equals(out)))
 						changed = true;
 				}
 			}
