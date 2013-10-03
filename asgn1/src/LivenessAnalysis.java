@@ -76,8 +76,10 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					in = new HashSet<Register>();
 					
 					// Union of entry of successors
-					for(Quad succ_q : succs) 
-						out.addAll(inMap.get(succ_q));
+					for(Quad succ_q : succs) {
+						if(inMap.get(succ_q) != null)
+							out.addAll(inMap.get(succ_q));
+					}
 					
 					List<RegisterOperand> def = q.getDefinedRegisters();
 					List<RegisterOperand> used = q.getUsedRegisters();
