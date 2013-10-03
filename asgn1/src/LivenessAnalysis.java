@@ -162,5 +162,6 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		}
 		
 		return in;
+	}
 }
 
