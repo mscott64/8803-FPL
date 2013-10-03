@@ -87,7 +87,7 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 					in.addAll(out);
 					// Remove kill set
 					for(RegisterOperand ro : def) 
-						in.remove(ro.getRegister());// = setRemove(ro.getRegister(), in);
+						in.remove(ro.getRegister());
 					
 					// Add gen set
 					for(RegisterOperand ro : used)
@@ -118,19 +118,6 @@ public class LivenessAnalysis extends DataflowAnalysis<Register> {
 		
 		succs.add(bb.getQuad(index + 1));
 		return succs;
-	}
-	
-	private Set<Register> setRemove(Register r, Set<Register> in) {
-		
-		String r_str = r.toString();
-		for(Register curr : in) {
-			if(r_str.equals(curr.toString())) {
-				in.remove(curr);
-				return in;
-			}
-		}
-		
-		return in;
 	}
 }
 
